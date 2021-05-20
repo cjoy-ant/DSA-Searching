@@ -177,6 +177,45 @@ const main = () => {
 
   console.log(binarySearchDrill(array, 62));
   console.log(binarySearchDrill(array, 4));
+
+    // 3. Find a book
+    const LIBRARY = [
+      { deweyNum: "000.12", title: "Computer Science" },
+      { deweyNum: "170.11", title: "Ethics" },
+      { deweyNum: "320.43", title: "Political Science" },
+      { deweyNum: "520.14", title: "Astronomy" },
+      { deweyNum: "720.50", title: "Architecture" },
+      { deweyNum: "860.27", title: "Spanish and Portugese literatures" }
+    ];
+    const bookFinder = (
+      library,
+      deweyNum,
+      title,
+      start = 0,
+      end = library.length - 1
+    ) => {
+      if (start > end) {
+        return -1;
+      }
+  
+      const index = Math.floor((start + end) / 2);
+      const book = library[index];
+  
+      console.log(start, end);
+      if (book.deweyNum === deweyNum) {
+        if (book.title === title) {
+          return `The book '${title}' is at index ${index}`;
+        }
+        return -1;
+      } else if (book.deweyNum < deweyNum) {
+        return bookFinder(library, deweyNum, title, index + 1, end);
+      } else if (book.deweyNum > deweyNum) {
+        return bookFinder(library, deweyNum, title, start, index - 1);
+      }
+    };
+  
+    console.log(bookFinder(LIBRARY, "000.12", "Computer Science"));
+  
 };
 
 module.exports = main;

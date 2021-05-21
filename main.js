@@ -229,6 +229,23 @@ const main = () => {
 
     // 8 6 5 7 9 10 11
 
+    // 5. Implement different tree traversals (see BST.js)
+
+    const dataset = [25, 15, 50, 10, 24, 35, 70, 4, 12, 18, 31, 44, 66, 90, 22];
+
+    // preOrder(dataset) =  [25, 15, 10, 4, 12, 24, 18, 22, 50, 35, 31, 44, 70, 66, 90]
+    // inOrder(dataset) =   [4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90]
+    // postOrder(dataset) = [4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90]
+
+    const traversal = (array) => {
+      const tree = new BinarySearchTree();
+      array.forEach((value) => tree.insert(value));
+      console.log(tree.inOrder());
+      console.log(tree.preOrder());
+      console.log(tree.postOrder());
+    };
+
+    traversal(dataset);
 };
 
 module.exports = main;

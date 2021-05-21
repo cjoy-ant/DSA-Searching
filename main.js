@@ -241,9 +241,12 @@ const main = () => {
       const tree = new BinarySearchTree();
       array.forEach((value) => tree.insert(value));
       console.log(tree.inOrder());
+      // 4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90
       console.log(tree.preOrder());
+      // 25, 15, 10, 4, 12, 24, 18, 22, 50, 35, 31, 44, 70, 66, 90
       console.log(tree.postOrder());
-    };
+      // 4, 12, 10, 22, 18, 24, 15, 31, 44, 35, 66, 90, 70, 50, 25
+      };
 
     traversal(dataset);
 };

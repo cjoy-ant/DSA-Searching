@@ -249,6 +249,69 @@ const main = () => {
       };
 
     traversal(dataset);
+
+  // 6. Find the next commanding officer
+  // UNFINISHED
+  /*
+                      Captain Picard
+                    /               \ 
+              Commander Riker       Commander Data
+              /         \                     \
+        Lt. Cmdr.     Lt. Cmdr.            Lt. Cmdr.
+        Worf          LaForge              Crusher
+        /                                 /
+    Lieutenant                       Lieutenant
+    security-officer                  Selar
+  
+  Write a program that will take this tree of commanding officers 
+  and outlines the ranking officers in their ranking order 
+  so that if officers start dropping like flies, 
+  we know who is the next person to take over command. */
+
+  // use preOrder traversal
+
+  const officers = [
+    { name: "Picard", rank: "Captain", id: 5 },
+    { name: "Riker", rank: "Commander", id: 3 },
+    { name: "Data", rank: "Commander", id: 8 },
+    { name: "Worf", rank: "Lieutenant Commander", id: 2 },
+    { name: "LaForge", rank: "Lieutenant Commander", id: 4 },
+    { name: "Crusher", rank: "Lieutenant Commander", id: 7 },
+    { name: "Security-Officer", rank: "Lieutenant", id: 1 },
+    { name: "Selar", rank: "Lieutenant", id: 6 }
+  ];
+
+  const whosInCommand = (
+    officers,
+    name,
+    id,
+    start = 0,
+    end = officers.length - 1
+  ) => {
+    if (start > end) {
+      return -1;
+    }
+
+    const index = Math.floor((start + end) / 2);
+    const officer = officers[index];
+
+    console.log(start, end);
+    if (officer.name === name) {
+      if (officer.id === id) {
+        console.log(officers);
+        let newCommand = officers.find((officer) => officer.id > id);
+        return `${officer.rank} ${officer.name} is down. You will now report to ${newCommand.rank} ${newCommand.name}`;
+      }
+      return -1;
+    } else if (officer.id < id) {
+      return whosInCommand(officers, name, id, index + 1, end);
+    } else if (officer.id > id) {
+      return whosInCommand(officers, name, id, start, index - 1);
+    }
+  };
+
+  console.log(whosInCommand(officers, "Crusher", 7));
+
 };
 
 module.exports = main;
